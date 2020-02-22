@@ -20,24 +20,28 @@
 #' @param format It takes "long" if the data are arranged in two columns, with the left-hand one
 #'   containing the values, and the righ-hand one containing a grouping variable; it takes "short"
 #'   if the values of the two groups being compared are stored in two different adjacent columns.
+#' @param sample1.lab Label for the first sample being tested (default: smpl 1).
+#' @param sample2.lab Label for the first sample being tested (default: smpl 2).
 #' @param B Desired number of permutations (set at 999 by default).
 #'
-#' @return The chart returned by the function displays the distribution of the permuted mean
-#' difference between the two samples; a dashed line indicates the observed mean difference.
-#' A rug plot at the bottom of the density curve indicates the individual permuted mean differences.
-#' At the bottom of the chart, a number of information are displayed. In particular,
-#' the observed mean difference, the number of
-#' permutations used, and the permuted p-value are reported. In the last row, the result of the
-#' regular t-test (both assuming and not assuming equal variances) is reported to allow users to
-#' compare the outcome of these different versions of the test.
+#' @return The frequency histogram returned by the function displays the distribution of the
+#' permuted mean difference between the two samples; a solid dot indicates the observed mean
+#' difference, while an hollow dot represents the mean of the permuted differences.
+#' Two dashed blue lines indicates the 0.025 and 0.975 percentile of the permuted
+#' distribution. A rug plot at the bottom histgram indicates the individual permuted mean
+#' differences. At the bottom of the chart, some information are displayed.
+#' In particular, the observed mean difference and the permuted p-values are reported.
+#' In the last row, the result of the regular (parametric) t-test (both assuming and
+#' not assuming equal variances) is reported to allow users to compare the outcome of
+#' these different versions of the test.
 #'
 #' @keywords perm.t.test
 #'
 #' @export
 #'
 #' @importFrom utils unstack
-#' @importFrom stats density
-#' @importFrom graphics polygon
+#' @importFrom stats quantile
+#' @importFrom graphics hist polygon
 #'
 #' @examples
 #' #load the 'resample' package which stores a toy dataset
@@ -49,7 +53,7 @@
 #' #performs the permutation-based t-test using 199 permutations
 #' perm.t.test(Verizon, format="long", B=199)
 #'
-perm.t.test <- function (data,format,B=999){
+perm.t.test <- function (data,format,sample1.lab=NULL,sample2.lab=NULL,B=999){
   options(scipen=999)
 
   if (format=="long") {
@@ -60,6 +64,12 @@ perm.t.test <- function (data,format,B=999){
     sample1 <- data[,1]
     sample2 <- data[,2]
   }
+
+  #if the parameters for samples' label are NULL, assign default labels, otherwise do nothing
+  if (is.null(sample1.lab)==TRUE) {
+    sample1.lab <- "smpl 1"
+    sample2.lab <- "smpl 2"
+  } else {}
 
   #get some statistics for the two samples
   n1 <- length(sample1)
@@ -83,9 +93,9 @@ perm.t.test <- function (data,format,B=999){
   pooledData <- c(sample1, sample2)
   size.sample1 <- length(sample1)
   size.sample2 <- length(sample2)
-  size.pooled <- size.sample1+size.sample2
+  size.pooled <- size.sample1 + size.sample2
   nIter <- B
-  meanDiff <- numeric(nIter+1)
+  meanDiff <- numeric(nIter + 1)
   meanDiff[1] <- round(mean1 - mean2, digits=2)
 
   #set the progress bar to be used inside the loop
@@ -103,12 +113,18 @@ perm.t.test <- function (data,format,B=999){
   p.uppertail <- (1 + sum (meanDiff[-1]  > meanDiff[1])) / (1 + B)
   two.sided.p <- 2 * min(p.lowertail, p.uppertail)
 
-  graphics::plot(stats::density(meanDiff), main="Distribution of permuted mean differences",
-       xlab="",
-       sub=paste0("sample 1 (n: ", n1,") (95% CI lower bound., mean, 95% CI upper bound.): ", sample1_lci, ", ", mean1, ", ", sample1_uci, "\nsample 2 (n: ", n2,") (95% CI lower bound., mean, 95% CI upper bound.): ", sample2_lci, ", ", mean2, ", ", sample2_uci,"\nobserved mean difference (dashed line): ", meanDiff[1],"; permuted p.value (2-sided): ", round(two.sided.p,4), " (number of permutations: ",B,")\nregular t-test p-values (2-sided): ",round(p.equal.var,4)," (equal variance); ",round(p.unequal.var,4), " (unequal variance)"),
-       cex.main=0.85,
-       cex.sub=0.70)
-  graphics::polygon(stats::density(meanDiff), col="grey")
+
+  graphics::hist(meanDiff, main=paste0("Distribution of permuted mean differences\n(number of permutations: ", B, ")"),
+                 xlab="",
+                 sub=paste0(sample1.lab, " (n: ", n1,") (95% CI lower bound., mean, 95% CI upper bound.): ", sample1_lci, ", ", mean1, ", ", sample1_uci, "\n", sample2.lab, " (n: ", n2,") (95% CI lower bound., mean, 95% CI upper bound.): ", sample2_lci, ", ", mean2, ", ", sample2_uci,"\nobs. mean diff. (solid dot): ", meanDiff[1],"; perm. p.value mean ", sample1.lab, " < ", sample2.lab, ": ", round(p.lowertail, 4), "; perm. p.value mean ", sample1.lab, " > ", sample2.lab, ": ", round(p.uppertail,4), "; perm. p.value (2-sided): ", round(two.sided.p,4),"\nregular t-test p-values (2-sided): ", round(p.equal.var,4)," (equal variance); ",round(p.unequal.var,4), " (unequal variance)"),
+                 cex.main=0.85,
+                 cex.sub=0.70)
+
   rug(meanDiff, col="#0000FF")
-  abline(v=meanDiff[1], lty=2, col="red")
+
+  abline(v=stats::quantile(meanDiff, 0.025), lty=2, col="blue")
+  abline(v=stats::quantile(meanDiff, 0.975), lty=2, col="blue")
+
+  points(x=meanDiff[1], y=0, pch=20, col = "black")
+  points(x=mean(meanDiff[-1]), y=0, pch=1, col="black")
 }

@@ -48,7 +48,7 @@ while to complete.\cr
 The function plots the cumulative distribution of the values of the covariate at the locations of
 the input point pattern, and adds an acceptance interval (with significance level equal to 0.05;
 sensu Baddeley et al., "Spatial Point Patterns. Methodology and Applications with R", CRC Press
-2016, 208) that allows to assess the statistical significance of the observec cumulative
+2016, 208) that allows to assess the statistical significance of the observed cumulative
 distribution. The interval is built by calculating the cumulative distribution of B realizations
 of a Complete Spatial Random process, and keeping the middle 95percent of those B distributions.
 B is set by default to 200, but can be increased by the user. The number of random points drawn

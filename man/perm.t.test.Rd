@@ -4,7 +4,8 @@
 \alias{perm.t.test}
 \title{R function for permutation-based t-test}
 \usage{
-perm.t.test(data, format, B = 999)
+perm.t.test(data, format, sample1.lab = NULL, sample2.lab = NULL,
+  B = 999)
 }
 \arguments{
 \item{data}{Dataframe containing the data.}
@@ -13,17 +14,23 @@ perm.t.test(data, format, B = 999)
 containing the values, and the righ-hand one containing a grouping variable; it takes "short"
 if the values of the two groups being compared are stored in two different adjacent columns.}
 
+\item{sample1.lab}{Label for the first sample being tested (default: smpl 1).}
+
+\item{sample2.lab}{Label for the first sample being tested (default: smpl 2).}
+
 \item{B}{Desired number of permutations (set at 999 by default).}
 }
 \value{
-The chart returned by the function displays the distribution of the permuted mean
-difference between the two samples; a dashed line indicates the observed mean difference.
-A rug plot at the bottom of the density curve indicates the individual permuted mean differences.
-At the bottom of the chart, a number of information are displayed. In particular,
-the observed mean difference, the number of
-permutations used, and the permuted p-value are reported. In the last row, the result of the
-regular t-test (both assuming and not assuming equal variances) is reported to allow users to
-compare the outcome of these different versions of the test.
+The frequency histogram returned by the function displays the distribution of the
+permuted mean difference between the two samples; a solid dot indicates the observed mean
+difference, while an hollow dot represents the mean of the permuted differences.
+Two dashed blue lines indicates the 0.025 and 0.975 percentile of the permuted
+distribution. A rug plot at the bottom histgram indicates the individual permuted mean
+differences. At the bottom of the chart, some information are displayed.
+In particular, the observed mean difference and the permuted p-values are reported.
+In the last row, the result of the regular (parametric) t-test (both assuming and
+not assuming equal variances) is reported to allow users to compare the outcome of
+these different versions of the test.
 }
 \description{
 The function allows to perform a permutation-based t-test to compare two independent groups. The

@@ -26,9 +26,9 @@ and of feature dataset to be also displayed.}
 }
 \value{
 The function returns a list storing the following components \itemize{
- \item{$obs.NN.dist: }{observed NN distances}
+ \item{$obs.aver.NN.dist: }{average of the observed NN distances}
  \item{$obs.R: }{observed R value}
- \item{$aver.rand.R: }{average randomized R}
+ \item{$aver.rand.R: }{average of the randomized Rs}
  \item{$p.value clustered: }{p-value for a clustered pattern}
  \item{$p.value.dispersed: }{p-value for a dispersed pattern}
  \item{$p.value.diff.from.random: }{p-value for a pattern different from random}

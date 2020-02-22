@@ -46,7 +46,17 @@
 #'
 #' In case both the from- and the to- feature are of point type, another histogram is produced,
 #' which provides the same information of the preceding histogram, but derived from the
-#' permutation-based routine that has been detailed above.
+#' permutation-based routine that has been detailed above.\cr
+#'
+#' The function also produces a map showing the study area, the from- and the to-features.
+#' The from-features are given a colour according to whether or not their minimum distance to
+#' the nearest to-feature is smaller (GREEN) or larger (RED) than the 0.025 and 0.975 (respectively)
+#' of the distribution of the randomized average distances. This information is also reported in
+#' a new field that is appended to the input dataset.
+#' Optionally, the input dataset (with 2 new columns added) can be exported using the 'export'parameter.
+#' The new columns store: the features' minimum distance to the nearest to-feature;
+#' a string indicating if the corresponding feature is closer or more distant than expected to the
+#' nearest to-feature.
 #'
 #' @param from.feat Feature (of point type; SpatialPointsDataFrame class) whose spatial association
 #'   with the to-feature has to be assessed.
@@ -61,6 +71,8 @@
 #' @param B Number of randomizations to be used (199 by default).
 #' @param oneplot TRUE (default) or FALSE if the user wants or does not want the plots displayed in
 #'   a single window.
+#' @param export FALSE (default) or TRUE is the user wants to export the input dataset as a shapefile
+#' (see description for further info).
 #'
 #' @keywords distRandSign
 #'
@@ -80,9 +92,13 @@
 ##'  \item{$p.value different from random-rnd-: }
 ##'  \item{$p.value different from random-perm- (returned only when both the from- and to-
 ##'  features are of point type)}
+##'  \item{$dataset: from.feature dataset with 2 fields added: one ('obs.min.dist') storing the from-features's minimum
+##'  distance to the nearest to-feature, one ('signif') storing the significance of the distance (see description)}
 ##' }
 #'
 #' @export
+#'
+#' @importFrom rgdal writeOGR
 #'
 #' @examples
 #' data(springs)
@@ -100,9 +116,15 @@
 #'
 #' @seealso \code{\link{distRandCum}} , \code{\link{distCovarModel}} , \code{\link{Aindex}}
 #'
-distRandSign <- function(from.feat, to.feat, studyplot=NULL, buffer=0, B=199, oneplot=TRUE){
+distRandSign <- function(from.feat, to.feat, studyplot=NULL, buffer=0, B=199, oneplot=TRUE, export=FALSE){
 
+  #disable scientific notation
   options(scipen=999)
+
+  #disable warnings to keep R from returning a warning
+  #in case the user want to export the from.feat and the fields names are too long;
+  #the warning is produced by writeOGR function when it exports a esri shapefile
+  options(warn = -1)
 
   if(is.null(studyplot)==TRUE){
     # build the convex hull of the union of the convex hulls of the two features
@@ -120,7 +142,7 @@ distRandSign <- function(from.feat, to.feat, studyplot=NULL, buffer=0, B=199, on
   rnd.av.min.dist <- numeric(B)
 
   #require 'rgeos' package; gDistance calculates all the pair-wise distances between each from-feature and to-feature
-  res <- gDistance(from.feat, to.feat, byid=TRUE)
+  res <- rgeos::gDistance(from.feat, to.feat, byid=TRUE)
 
   #for each from-feature (i.e., column-wise), get the minimum distance to the to-feature
   obs.min.distances <- apply(res, 2, min)
@@ -140,6 +162,22 @@ distRandSign <- function(from.feat, to.feat, studyplot=NULL, buffer=0, B=199, on
     rnd.av.min.dist[i] <- mean(apply(res, 2, min))
     setTxtProgressBar(pb, i)
   }
+
+  #calculate the 0.025 and 0.975 percentile of the randomized average minimum distances
+  lower_perc <- quantile(rnd.av.min.dist, 0.025)
+  upper_perc <- quantile(rnd.av.min.dist, 0.975)
+
+  #copy the obs mininum distances in a new column of the input shapefile
+  from.feat$obs.min.dist <- obs.min.distances
+
+  #assign a label to the observed min distances according to whether they are smaller or larger
+  #than the lower or upper percentile of the distribution of randomized average distance
+  from.feat$signif <- ifelse(from.feat$obs.min.dist < lower_perc, "sign. closer than expct.", ifelse(from.feat$obs.min.dist > upper_perc, "sign. more dist. than expct.", "-"))
+
+  #assign a color label (to be used later on when plotting) to the observed min distances according to whether they are smaller or larger
+  #than the lower or upper percentile of the distribution of randomized average distance
+  color_code <- ifelse(from.feat$obs.min.dist < lower_perc, "green", ifelse(from.feat$obs.min.dist > upper_perc, "red", "black"))
+  from.feat$color_code <- color_code
 
   #calculate the p-value for a pattern featuring smaller than expected distances
   pclus <- (1 + sum (rnd.av.min.dist < obs.av.min.dist)) / (1 + B)
@@ -239,24 +277,28 @@ distRandSign <- function(from.feat, to.feat, studyplot=NULL, buffer=0, B=199, on
   }
 
   raster::plot(region,
-       main="Map of the from- and to-feature, plus study area",
-       cex.main=0.9, col=NA,
-       border="red",
-       lty=2,
-       axes=TRUE)
+               main="Map of the from- and to-feature, plus study area",
+               sub=paste0("0.025 (lower) percentile of randomized avr. min. distances: ", round(lower_perc, 2), "\n0.975 (upper) percentile of randomized avr. min. distances: ", round(upper_perc,2), "\nGREEN: obs. min. dist. < lower percentile; RED: obs. min dist. > upper percentile \nBLACK: obs. min. dist. not sign. different from random"),
+               cex.main=0.9, col=NA,
+               cex.sub=0.70,
+               border="red",
+               lty=2,
+               axes=TRUE)
+
   raster::plot(from.feat,
-       add=TRUE,
-       pch=20)
+               add=TRUE,
+               pch=20, col=from.feat$color_code)
+
   raster::plot(to.feat,
-       add=TRUE)
+               add=TRUE)
 
   #plot the histogram of the randomized average minimum distances
   graphics::hist(rnd.av.min.dist,
-       main=paste0("Feature-to-feature distance analysis: \nfreq. distribution of randomized average minimum distances across ", B, " iterations"),
-       sub= paste0("Obs. aver. min. distance: ", round(obs.av.min.dist,3), "; Average of randomized min. distances: ", round(mean(rnd.av.min.dist),3), "\np-value closer than expected: ",  pclus.to.report, "; p-value more distant than expected: ", preg.to.report, "\np-value different from random: ", two.tailed.to.report),
-       xlab="",
-       cex.main=0.9,
-       cex.sub=0.70)
+                 main=paste0("Feature-to-feature distance analysis: \nfreq. distribution of randomized average minimum distances across ", B, " iterations"),
+                 sub= paste0("Obs. aver. min. distance: ", round(obs.av.min.dist,3), "; Average of randomized min. distances: ", round(mean(rnd.av.min.dist),3), "\np-value closer than expected: ",  pclus.to.report, "; p-value more distant than expected: ", preg.to.report, "\np-value different from random: ", two.tailed.to.report),
+                 xlab="",
+                 cex.main=0.9,
+                 cex.sub=0.70)
   rug(rnd.av.min.dist, col = "#0000FF")
   abline(v=stats::quantile(rnd.av.min.dist, 0.025), lty=2, col="blue")
   abline(v=stats::quantile(rnd.av.min.dist, 0.975), lty=2, col="blue")
@@ -268,11 +310,11 @@ distRandSign <- function(from.feat, to.feat, studyplot=NULL, buffer=0, B=199, on
   if((class(from.feat)[1]=="SpatialPointsDataFrame" | class(from.feat)[1]=="SpatialPoints") & (class(to.feat)[1]=="SpatialPointsDataFrame" | class(to.feat)[1]=="SpatialPoints")){
 
     graphics::hist(perm.av.min.dist,
-         main=paste0("Feature-to-feature distance analysis: \nfreq. distribution of permuted average minimum distances across ", B, " iterations"),
-         sub= paste0("Obs. aver. min. distance: ", round(obs.av.min.dist,3), "; Average of permuted min. distances: ", round(mean(perm.av.min.dist)), "\np-value closer than expected: ", pclus.perm.to.report,"; p-value more distant than expected: ", preg.perm.to.report,"\np-value different from random: ", p.two.t.perm.to.report),
-         xlab="",
-         cex.main=0.9,
-         cex.sub=0.70)
+                   main=paste0("Feature-to-feature distance analysis: \nfreq. distribution of permuted average minimum distances across ", B, " iterations"),
+                   sub= paste0("Obs. aver. min. distance: ", round(obs.av.min.dist,3), "; Average of permuted min. distances: ", round(mean(perm.av.min.dist)), "\np-value closer than expected: ", pclus.perm.to.report,"; p-value more distant than expected: ", preg.perm.to.report,"\np-value different from random: ", p.two.t.perm.to.report),
+                   xlab="",
+                   cex.main=0.9,
+                   cex.sub=0.70)
     rug(perm.av.min.dist, col = "#0000FF")
     abline(v=stats::quantile(perm.av.min.dist, 0.025), lty=2, col="blue")
     abline(v=stats::quantile(perm.av.min.dist, 0.975), lty=2, col="blue")
@@ -280,7 +322,7 @@ distRandSign <- function(from.feat, to.feat, studyplot=NULL, buffer=0, B=199, on
     points(x=obs.av.min.dist, y=0, pch=20, col = "black")
   } else {}
 
-  #if there are two inout point datasets, create a list also containing the permuted statistics,
+  #if there are two input point datasets, create a list also containing the permuted statistics,
   #otherwise create a list with only the randomized statistics
   if((class(from.feat)[1]=="SpatialPointsDataFrame" | class(from.feat)[1]=="SpatialPoints") & (class(to.feat)[1]=="SpatialPointsDataFrame" | class(to.feat)[1]=="SpatialPoints")){
 
@@ -293,7 +335,8 @@ distRandSign <- function(from.feat, to.feat, studyplot=NULL, buffer=0, B=199, on
                     "p.value more distant than expected-rnd-"=round(preg,3),
                     "p.value more distant than expected-perm-"=round(p.upper.perm,3),
                     "p.value different from random-rnd-"=round(two.tailed.p, 3),
-                    "p.value different from random-perm-"=round(two.tailed.p.perm, 3))
+                    "p.value different from random-perm-"=round(two.tailed.p.perm, 3),
+                    "dataset"=subset(from.feat, select = -c(color_code)))
 
   } else {
 
@@ -302,11 +345,19 @@ distRandSign <- function(from.feat, to.feat, studyplot=NULL, buffer=0, B=199, on
                     "avrg.rnd.min.dist"=mean(rnd.av.min.dist),
                     "p.value closer than expected"=round(pclus,3),
                     "p.value more distant than expected"=round(preg,3),
-                    "p.value different from random"=round(two.tailed.p, 3))
+                    "p.value different from random"=round(two.tailed.p, 3),
+                    "dataset"=subset(from.feat, select = -c(color_code)))
+  }
+
+  if(export==TRUE){
+    rgdal::writeOGR(subset(from.feat, select = -c(color_code)), ".", "mod_input_dataset", driver="ESRI Shapefile")
   }
 
   # restore the original graphical device's settings
   par(mfrow = c(1,1))
+
+  #restore the warning setting
+  options(warn = 1)
 
   return(results)
 }

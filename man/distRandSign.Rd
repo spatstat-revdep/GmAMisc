@@ -6,7 +6,7 @@
 points-to-lines, points-to-polygons)}
 \usage{
 distRandSign(from.feat, to.feat, studyplot = NULL, buffer = 0,
-  B = 199, oneplot = TRUE)
+  B = 199, oneplot = TRUE, export = FALSE)
 }
 \arguments{
 \item{from.feat}{Feature (of point type; SpatialPointsDataFrame class) whose spatial association
@@ -27,6 +27,9 @@ upon the units of the input data.}
 
 \item{oneplot}{TRUE (default) or FALSE if the user wants or does not want the plots displayed in
 a single window.}
+
+\item{export}{FALSE (default) or TRUE is the user wants to export the input dataset as a shapefile
+(see description for further info).}
 }
 \value{
 The function returns a list storing the following components \itemize{
@@ -45,6 +48,8 @@ The function returns a list storing the following components \itemize{
  \item{$p.value different from random-rnd-: }
  \item{$p.value different from random-perm- (returned only when both the from- and to-
  features are of point type)}
+ \item{$dataset: from.feature dataset with 2 fields added: one ('obs.min.dist') storing the from-features's minimum
+ distance to the nearest to-feature, one ('signif') storing the significance of the distance (see description)}
 }
 }
 \description{
@@ -94,7 +99,17 @@ at the bottom of the plot.\cr
 
 In case both the from- and the to- feature are of point type, another histogram is produced,
 which provides the same information of the preceding histogram, but derived from the
-permutation-based routine that has been detailed above.
+permutation-based routine that has been detailed above.\cr
+
+The function also produces a map showing the study area, the from- and the to-features.
+The from-features are given a colour according to whether or not their minimum distance to
+the nearest to-feature is smaller (GREEN) or larger (RED) than the 0.025 and 0.975 (respectively)
+of the distribution of the randomized average distances. This information is also reported in
+a new field that is appended to the input dataset.
+Optionally, the input dataset (with 2 new columns added) can be exported using the 'export'parameter.
+The new columns store: the features' minimum distance to the nearest to-feature;
+a string indicating if the corresponding feature is closer or more distant than expected to the
+nearest to-feature.
 }
 \examples{
 data(springs)

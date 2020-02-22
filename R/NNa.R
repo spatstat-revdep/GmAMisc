@@ -30,9 +30,9 @@
 #'   and of feature dataset to be also displayed.
 #'
 #' @return The function returns a list storing the following components \itemize{
-##'  \item{$obs.NN.dist: }{observed NN distances}
+##'  \item{$obs.aver.NN.dist: }{average of the observed NN distances}
 ##'  \item{$obs.R: }{observed R value}
-##'  \item{$aver.rand.R: }{average randomized R}
+##'  \item{$aver.rand.R: }{average of the randomized Rs}
 ##'  \item{$p.value clustered: }{p-value for a clustered pattern}
 ##'  \item{$p.value.dispersed: }{p-value for a dispersed pattern}
 ##'  \item{$p.value.diff.from.random: }{p-value for a pattern different from random}
@@ -196,7 +196,7 @@ NNa <- function(feature, studyplot=NULL, buffer=0, B=199, cov.var=NULL, addmap=T
   points(x=mean(rnd.Rindex), y=0, pch=1, col="black")
   points(x=obs.Rindex, y=0, pch=20, col = "black")
 
-  results <- list("obs.NN.dist"=obs.NNdist,
+  results <- list("obs.aver.NN.dist"=obs.NNdist,
                   "aver.rand.NN.dist" = mean(rnd.NNdist),
                   "obs.R"=obs.Rindex,
                   "aver.rand.R"= mean(rnd.Rindex),

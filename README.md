@@ -1,5 +1,5 @@
 # GmAMisc (Gianmarco Alberti Miscellaneous)
-vers 1.0.0
+vers 1.1.0
 
 `GmAMisc` contains many functions useful for univariate outlier detection, permutation-based t-test, permutation-based chi-square test, visualization of residuals, and bootstrap Cramer's V, plotting of the results of the Mann-Whitney and Kruskall-Wallis test, calculation of Brainerd-Robinson similarity coefficient and subsequent clustering, validation of logistic regression models, optimism-corrected AUC, robust Bland-Altman plot, calculation of posterior probability for different chronological relationships between two Bayesian radiocarbon phases, point pattern analysis, landform classification, clustering of spatial features.
 
@@ -170,6 +170,17 @@ A list is also returned, containing what follows:
 * `$AUC`: the AUC statistics.
 
 <br>
+`distDifftest()`: function for testing the difference in distance of two point feature datasets to a target feature dataset. It allows to perform a permutation-based t-test to test the difference in distance of two point feature datasets to a target feature dataset. The latter can consist of either points, a lines, or polygons.
+ 
+Under the hood, the function relies on the `perm.t.test()` function out of this same package. First, for each feature of both patterns, the distance to the nearest target feature is calculated; for each set of features, the distances are eventually averaged; the observed difference between the two averages
+is stored. Then, the individual observed nearest distances are randomly assigned to either group; the re-assignment is performed B times (999 by default) and each time the difference between the two averages is calculated. The distribution of these permuted average differenes represents the distribution of that statistic under the Null Hypothesis of no difference in distance to the target feature. One-sided and two-sided p-values are reported.
+
+The frequency histogram returned by the function displays the distribution of the
+permuted mean difference between the two samples; a solid dot indicates the observed mean
+difference, while an hollow dot represents the mean of the permuted differences.
+Two dashed blue lines indicates the 0.025 and 0.975 percentile of the permuted distribution. A rug plot at the bottom histgram indicates the individual permuted mean differences. At the bottom of the chart, some information are displayed. In particular, the observed mean difference and the permuted p-values are reported. In the last row, the result of the regular (parametric) t-test (both assuming and not assuming equal variances) is reported to allow users to compare the outcome of these different versions of the test.
+
+<br>
 
 `distRandCum()`: allows to assess if there is a significant spatial association between a point pattern and the features of another pattern.
 For instance, users may want to assess if the features of a point pattern tend to lie close to some features represented by polylines. Given a from-feature (event for which we want to estimate the spatial association with the to-feature) and a to-feature (event in relation to which we want to estimate the spatial association for the from-feature), the assessment is performed by means of a randomized procedure:
@@ -207,6 +218,8 @@ If both the from-feature and the to-feature are of point type (SpatialPointsData
 
 The function produces a histogram showing: the distribution of randomized average minimum distances; a black dot indicating the observed average minimum distance; a hollow dot representing the average of the randomized minimum distances; two blue reference lines correspond to the 0.025th and to the 0.975th quantile of the randomized distribution. P-values are reported at the bottom of the plot. In case both the from- and the to- feature are of point type, another histogram is produced, which provides the same information of the preceding histogram, but derived from the permutation-based routine that has been detailed above.
 
+The function also produces a map showing the study area, the from- and the to-features. The from-features are given a colour according to whether or not their minimum distance to the nearest to-feature is smaller (GREEN) or larger (RED) than the 0.025 and 0.975 (respectively) of the distribution of the randomized average distances. This information is also reported in a new field that is appended to the input dataset. Optionally, the input dataset (with 2 new columns added) can be exported using the `export` parameter. The new columns store the features' minimum distance to the nearest to-feature and a string indicating if the corresponding feature is closer or more distant than expected to the nearest to-feature.
+
 A list is also returned, containing what follows:
 * `$from.feat.min.dist`: distance of each entity of the from-feature to the nearest entity of the to-feature;
 * `$avrg.obs.min.dist`: observed average minimum distance;
@@ -217,7 +230,8 @@ A list is also returned, containing what follows:
 * `$p.value more distant than expected-rnd-`;
 * `$p.value more distant than expected-perm-` (returned only when both the from- and to- features are of point type);
 * `$p.value different from random-rnd-`;
-* `$p.value different from random-perm-` (returned only when both the from- and to- features are of point type).
+* `$p.value different from random-perm-` (returned only when both the from- and to- features are of point type);
+* `$dataset`: from.feature dataset with 2 fields added: one ('obs.min.dist') storing the from-features's minimum distance to the nearest to-feature, one ('signif') storing the significance of the distance.
 
 <br>
 
@@ -371,7 +385,7 @@ The function also returns a list containing information about the choosen method
 
 `perm.t.test()`: function for permutation-based t-test. The function allows to perform a permutation-based t-test to compare two independent groups. The test's results are graphically displayed within the returned chart. A permutation t-test proves useful when the assumption of 'regular' t-test are not met. In particular, when the two groups being compared show a very skewed distribution, and when the sample sizes are very unbalanced.
 *"The permutation test is useful even if we plan to use the two-sample t test. Rather than relying on Normal quantile plots of the two samples and the central limit theorem, we can directly check the Normality of the sampling distribution by looking at the permutation distribution. Permutation tests provide a “gold standard” for assessing two-sample t tests. If the two P-values differ considerably, it usually indicates that the conditions for the two-sample t don’t hold for these data. Because permutation tests give accurate P-values even when the sampling distribution is skewed, they are often used when accuracy is very important."* (Moore, McCabe, Craig, *Introduction to the Practice of Statistics*, New York: W. H. Freeman and Company, 2009).
-The chart returned by the function diplays the distribution of the permuted mean difference between the two samples; a dashed line indicates the observed mean difference. A rug plot at the bottom of the density curve indicates the individual permuted mean differences. Under the chart, a number of information are displayed. In particular, the observed mean difference, the number of permutations used, and the permuted p-value are reported. In the last row, the result of the regular t-test (both assuming and not assuming equal variances) is reported to allow users to compare the outcome of these different versions of the test.
+The chart returned by the function diplays the distribution of the permuted mean difference between the two samples; a dashed line indicates the observed mean difference. A rug plot at the bottom of the density curve indicates the individual permuted mean differences. Under the chart, a number of information are displayed. In particular, the observed mean difference, the number of permutations used, and permuted p-values are reported. In the last row, the result of the regular t-test (both assuming and not assuming equal variances) is reported to allow users to compare the outcome of these different versions of the test.
 
 <br>
 
@@ -395,6 +409,23 @@ The function returns a 2 plots, which can be arranged in just one visualization 
 * a plot of the cumulative distribution of the values of the covariate at the locations of the point patter along with the above-mentioned acceptance interval.
 
 For an example of the cumulative distribution plot plus acceptance interval, **see** for instance Carrero-Pazos, M. (2018). Density, intensity and clustering patterns in the spatial distribution of Galician megaliths (NW Iberian Peninsula). Archaeological and Anthropological Sciences. https://doi.org/10.1007/s12520-018-0662-2, figs. 4 and 5.
+
+<br>
+
+`pointsCovarDistr()`: function to plot the frequency distribution of the average value of a spatial covariate measured at randomized locations. It allows to test if there is a significant dependence of the input point pattern on a underlying numeric covariate (first-order effect).
+
+The function takes as input three datasets: a point patter ('SpatialPointsDataFrame' class), a covariate layer (of 'RasterLayer'class), and (optionally) a polygon feature ('SpatialPolygonsDataFrame' class) representing the study area and exactly matching the extent of the covariate layer. If the latter is not provided, it is internally worked out from the covariate raster and may make the whole function take a
+while to complete.
+
+The function plots a frequency distribution histogram of the average value of a spatial covariate at
+randomized locations (using B iterations). At each iteration, the number of randomized points is equal to the number of points of the input point pattern. Two blue reference lines correspond to the 0.025th and to the 0.975th quantile of the randomized distribution. A black dot represents the observed mean value of the covariate measured at the locations of the input point pattern. P-values are reported.
+
+A list is also returned, containing what follows:
+* `$obs.cov.values`: observed values of the covariate at the point pattern locations;
+* `$obs.average`: average of the observed values of the covariate;
+* `$p.value.obs.smaller.than.exp`: p.value for the observed average smaller than expected under the Null Hypothesis;
+* `$p.value.obs.larger.than.exp:`: p.value for the observed average larger than expected under the Null Hypothesis;
+* `$p.value.obs.diff.from.exp`: p.value for the observed average different from what expected under the Null Hypothesis.
 
 <br>
 
@@ -514,5 +545,11 @@ The function returns:
 <br>
 
 ## History
+`version 1.1.0`: 
+* minor corrections to the components in the list returned by the `NNa()` function; 
+* change in the output of the `perm.t.test()` function, which now produces a frequency distribution histogram; 1-sided permuted p-values are now also reported; user-defined labels for the two samples being tested can be used.
+* `distRandSign()`: in the map of from- and to-features, from-features are given a colour according to whether or not they are closer or more distant than expected to the nearest to-feature; users can now 'export' as a shapefile the input dataset featuring 2 new fields: one storing each feature's distance to the nearest to-feature; one containing a string indicating if the corresponding feature is closer or more distant than expected.
+* New function added: `distDiffTest()`, `pointsCovarDistr()`.
+
 `version 1.0.0`: 
 first release to CRAN
