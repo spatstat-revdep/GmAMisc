@@ -1,6 +1,6 @@
-694b5af10fd2be07ea841f8cc59ab184 *DESCRIPTION
-3f4d967e9a32868fa2946b45da910ad3 *NAMESPACE
-a3781984c0a5363a6bf2f1f81ee222c0 *NEWS.md
+194a92ec84cd1c60c97cc7d2f8fe13af *DESCRIPTION
+562ba58160589352f8adbc631e7fc6f2 *NAMESPACE
+f7e939b9c75b9e0035b89ce3cb493409 *NEWS.md
 294b57f9cfce6697926999b0c9f2b8c6 *R/Aindex.R
 96bb7cb5917b0a1976158523b72d29ed *R/Massachusetts.r
 600364ccaf7327c7b38b4284777598e7 *R/NNa.R
@@ -20,7 +20,6 @@ cd60a07676be2ca3bc32095e3cbd1a28 *R/faults.r
 2426ee3542472d99cfe3cb7562a57d53 *R/featClust.R
 3a489ac5b608584b04504b30fa20702e *R/impRst.R
 e7eddb8b96a3cd4afc24f5f046207944 *R/impShp.R
-22df1d133858adcf24b72586b400d50e *R/landfClass.R
 cd4eea89b67e6da33ed19271efc7ca95 *R/locations.r
 1b280c4d7ca14b3f6dc94712ea517924 *R/log_regr_data.r
 f647f6edfb0289947226e9862ec2962c *R/logregr.r
@@ -31,8 +30,8 @@ bea59f64d7a9cec91f5d5a1394e790bc *R/malta_polyg.r
 565077b1751c0ddd27b11affa814f304 *R/perm_t_test.r
 c57d6189fbea3cf0041fe884e1abc14d *R/phases.r
 4331fd82cff679acb6db2d548edcf1ce *R/plotJenks.R
-0559eae7d8e977416b4d4416a99eb71d *R/plot_kw.r
-3bc8090522a36331a1c9ec2ff5409857 *R/plot_mw.r
+0cb32406e061f5c316cc1ebbf67829b7 *R/plot_kw.r
+6afc26113cbeb35799ad21ca23748828 *R/plot_mw.r
 4fbea0717bbf26398554354f52b9ac62 *R/points.r
 a5d5633f03cdb14df1dc5d4bdc024774 *R/pointsCovarCum.R
 ad4938df825a884d0c79976aac3b4ba7 *R/pointsCovarDistr.R
@@ -51,7 +50,7 @@ ec1ae566778220868650b0b8c00b4b14 *R/robust_BA_plot.R
 cb07c0ff174c50b8e88f757ce3949e97 *R/springs.r
 fda721c5346d611af7d7fc3769d2a033 *R/thiessenpolyg.r
 f15b2ddd68c1c60d8d3641ea76998380 *R/vislim.R
-41c44af72f20ce404509ec41eaad2413 *README.md
+fd9ed799debcedc745871e0cc06b9ee0 *README.md
 c2606df84038d8e6ba9ee98a8917c69e *data/Massachusetts.rda
 457105f22fe5733e280131b1a18d32e1 *data/Starbucks.rda
 d7671095081800fe4277066daf33786d *data/assemblage.rda
@@ -89,15 +88,14 @@ bf1caff7053af66455db2dee6f62cbdb *man/distRandSign.Rd
 8690830042ebf5e376b36123284f11a5 *man/featClust.Rd
 5b5236ee129351ee1d6d2604356f0bc4 *man/impRst.Rd
 c1dfb654fdc7ae55a43f92ef03582bd6 *man/impShp.Rd
-5248a88c08a82a3daa72ffd75225b418 *man/kwPlot.Rd
-606e5f82e445c7488f02f30f8b4a7d24 *man/landfClass.Rd
+175d86bc7827f1a8df64cc84c242166f *man/kwPlot.Rd
 33fc16748b37d6a4f8d34ceacf12ce66 *man/locations.Rd
 3e098ee3022879d6c04fe8906cbcb116 *man/log_regr_data.Rd
 fcea8720d47d1443a9eb821c6b071cce *man/logregr.Rd
 563e1408ecee76462793de4bdb5941a2 *man/malta_dtm_40.Rd
 997a150de5a44ed998e3d30380a0afab *man/malta_polyg.Rd
 f9f7961892c8067c06d1f2ae29f7f596 *man/modelvalid.Rd
-58bf20addd4408ad36ace04f985117bc *man/mwPlot.Rd
+d4a75c26f1f65bca971db11cbf89df82 *man/mwPlot.Rd
 6ed08a4c5b6c08af0e425395082027af *man/outlier.Rd
 9dc0286236f3fd4aba612dcb7fa77853 *man/perm.t.test.Rd
 0d05b7c1adb7829f5605751f70f5f229 *man/phases.Rd

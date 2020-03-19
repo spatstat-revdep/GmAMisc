@@ -44,7 +44,7 @@
 #' @examples
 #' #create a toy dataset
 #' mydata <- data.frame(values=c(rnorm(30, 100,10),rnorm(30, 80,10),rnorm(30, 98,10)),
-#' group=c(rep("A", 30),rep("B", 30),rep("C", 30)))
+#' group = as.factor(gl(3, 30, labels = c("A", "B", "C"))))
 #'
 #' # performs the test, displays the test's result, including jittered points and notches.
 #' # It also performs the Dunn's posthoc test using Bonferroni p-value correction.

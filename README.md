@@ -1,5 +1,5 @@
 # GmAMisc (Gianmarco Alberti Miscellaneous)
-vers 1.1.0
+vers 1.1.1
 
 `GmAMisc` contains many functions useful for univariate outlier detection, permutation-based t-test, permutation-based chi-square test, visualization of residuals, and bootstrap Cramer's V, plotting of the results of the Mann-Whitney and Kruskall-Wallis test, calculation of Brainerd-Robinson similarity coefficient and subsequent clustering, validation of logistic regression models, optimism-corrected AUC, robust Bland-Altman plot, calculation of posterior probability for different chronological relationships between two Bayesian radiocarbon phases, point pattern analysis, landform classification, clustering of spatial features.
 
@@ -43,38 +43,6 @@ The package comes with some toy datasets:
 
 `thiessenpolyg`: SpatialPolygonsDataFrame representing Thiessen polygons around the points represented in the 'locations' dataset.
 
-<br>
-
-## List of implemented functions
-* `Aindex()`: function for calculating the Hodder-Okell's A index of spatial association.
-* `aucadj()`: function for optimism-adjusted AUC (Logistic Regression internal validation).
-* `BRsim()`: function for Brainerd-Robinson similarity coefficient (and optional clustering).
-* `chiperm()`: function for permutation-based chi-square test of independence.
-* `distCovarModel()`: function to model (and test) the dependence of a point pattern on the distance to another pattern.
-* `distRandCum()`: function to test the significance of the spatial relationship between two features in terms of the cumulative distribution of minimum distances.
-* `distRandSign()`: function to test the significance of the spatial relationship between two features (points-to-points, points-to-lines, points-to-polygons).
-* `featClust()`: function for features clustering on the basis of distances/area.
-* `impRst()`: function to easily import a raster dataset into R.
-* `impShp()`: function to easily import a vectorial dataset (shapefile) into R.
-* `kwPlot()`: function for visually displaying Kruskal-Wallis test's results.
-* `landfClass()`: function for landform classification on the basis od Topographic Position Index.
-* `logregr()`: function easy binary Logistic Regression and model diagnostics.
-* `modelvalid()`: function for binary Logistic Regression internal validation.
-* `mwPlot()`: function for visually displaying Mann-Whitney test's results.
-* `NNa()`: function for Nearest Neighbor analysis of point patterns.
-* `outlier()`: function for univariate outliers detection.
-* `perm.t.test()`: function for permutation-based t-test.
-* `plotJenks()`: function for plotting univariate classification using Jenks' natural break method.
-* `pointsCovarCum()`: function to plot the cumulative distribution (and acceptance interval) of the values of a spatial covariate measured at the locations of a point pattern.
-* `pointsCovarModel()`: function to model (and test) the dependence of a point pattern on a spatial numeric covariate.
-* `pointsInPolygons()`: function to test points-in-polygons relationship.
-* `pointsToPointsTess()`: function to test the relationship of a set of points with the Thiessen tessellation built around points belonging to another feature dataset.
-* `ppdPlot()`: function for plotting Posterior Probability Densities for Bayesian modeled 14C dates/parameters.
-* `prob.phases.relat()`: function to calculate the Posterior Probability for different chronological relations between two Bayesian radiocarbon phases.
-* `refNNa()`: function for refined Nearest Neighbor analysis of point patterns (G function).
-* `resc.val()`: function to rescale the values of a datset between a minimum and a maximum set by the user.
-* `robustBAplot()`: function to plot a robust version of the Bland-Altman plot.
-* `vislim()`: function for computing the limit of visibility of an object given its height.
 
 <br>
 
@@ -272,31 +240,6 @@ a vectorial dataset (of shapefile type) by means of a window that allows the use
 <br>
 
 `kwPlot()`: function for visually displaying Kruskal-Wallis test's results. The function allows to perform Kruskal-Wallis test, and to display the test's results in a plot along with boxplots. The boxplots display the distribution of the values of the two samples, and jittered points represent the individual observations. At the bottom of the chart, the test statistics (H) is reported, along with the degrees of freedom and the associated p value. Setting the parameter 'posthoc' to TRUE, the Dunn's test is performed (with Bonferroni adjustment by default): a dot chart is returned, as well as a list of p-values (2-sided). In the dot chart, a RED line indicates the 0.05 threshold. The groups compared on a pairwise basis are indicated on the left-hand side of the chart.
-
-<br>
-
-`landfClass()`: function that allows to perform landform classification on the basis of the *Topographic Position Index* calculated from an input Digital Terrain Model (RasterLayer class). The TPI is the difference between the elevation of a given cell and the average elevation of the surrounding cells in a user defined moving window. For landform classification, the TPI is first standardized and then thresholded; to isolate certain classes, a slope raster (which is internally worked out) is also needed.
-For details about the implemented classification, see: http://www.jennessent.com/downloads/tpi_documentation_online.pdf.
-Two methods are available:
--the first (devised by Weiss) produces a 6-class landform classification comprising:
-* valley
-* lower slope
-* flat slope
-* middle slope
-* upper clope
-* ridge
--the second (devised by Jennes) produces a 10-class classification comprising:
-* canyons, deeply incised streams
-* midslope drainages, shallow valleys
-* upland drainages, headwaters
-* u-shaped valleys
-* plains
-* open slopes
-* upper slopes, mesas
-* local ridges, hills in valleys
-* midslope ridges, small hills
-* mountain tops, high ridges.
-The second classification is based on two TPI that make use of two neighborhoods (moving windows) of different size: a s(mall) n(eighborhood) and a l(arge) n(eighborhood), defined by the parameters `sn` and `ln`. Besides rasters representing the different landform classes, the function optionally returns the TPI raster, either un- or standarized. The output rasters are plotted on the R graphic console and returned by the function (as objects of `RasterLayer` class) within a list.
 
 <br>
 
@@ -545,6 +488,9 @@ The function returns:
 <br>
 
 ## History
+`version 1.1.1`: 
+* minor fixes to the help documentation.
+
 `version 1.1.0`: 
 * minor corrections to the components in the list returned by the `NNa()` function; 
 * change in the output of the `perm.t.test()` function, which now produces a frequency distribution histogram; 1-sided permuted p-values are now also reported; user-defined labels for the two samples being tested can be used.

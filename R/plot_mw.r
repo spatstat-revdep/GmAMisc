@@ -54,14 +54,11 @@
 #' @examples
 #' #create a toy dataset
 #' mydata <- data.frame(values=c(rnorm(30, 100,10),rnorm(30, 80,10)),
-#' group=c(rep("A", 30),rep("B", 30)))
+#' group = as.factor(gl(2, 30, labels = c("A", "B"))))
 #'
 #' # performs the test, displays the test's result, including jittered points, notches,
 #' #overall median and mean, and the Hodges-Lehmann estimator
 #' mwPlot(x=mydata$values, y=mydata$group, strip=TRUE, omm=TRUE, notch=TRUE, HL=TRUE)
-#'
-#'# performs the test when y is not a grouping variable but a vector of values
-#' mwPlot(x=rnorm(30,80,10), y=rnorm(30, 60,10), xlabl="A", ylabl="B", strip=TRUE)
 #'
 mwPlot <- function (x,y,xlabl="x",ylabl="y", strip=FALSE,notch=FALSE,omm=FALSE, outl=TRUE, HL=FALSE){
   options(scipen=999)

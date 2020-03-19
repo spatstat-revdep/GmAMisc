@@ -1,3 +1,7 @@
+# GmAMisc 1.1.1:
+
+* minor fixes to the help documentation.
+
 # GmAMisc 1.1.0:
 
 * minor corrections to the components in the list returned by the `NNa()` function; 
