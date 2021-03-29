@@ -4,7 +4,9 @@
 \name{assemblage}
 \alias{assemblage}
 \title{Dataset: distribution of 7 archaeological objects across 9 assemblages}
-\format{A data frame with 9 rows and 7 variables}
+\format{
+A data frame with 9 rows and 7 variables
+}
 \usage{
 data(assemblage)
 }

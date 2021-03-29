@@ -4,8 +4,14 @@
 \alias{pointsInPolygons}
 \title{R function to test points-in-polygons relationship}
 \usage{
-pointsInPolygons(point.feat, polyg.feat, studyplot = NULL, scenario,
-  buffer = 0, cex.text = 0.7)
+pointsInPolygons(
+  point.feat,
+  polyg.feat,
+  studyplot = NULL,
+  scenario,
+  buffer = 0,
+  cex.text = 0.7
+)
 }
 \arguments{
 \item{point.feat}{Feature (of point type; SpatialPointsDataFrame class) whose spatial association

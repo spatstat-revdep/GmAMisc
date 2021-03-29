@@ -4,8 +4,14 @@
 \alias{chiperm}
 \title{R function for permutation-based chi-square test of independence}
 \usage{
-chiperm(data, B = 999, resid = FALSE, filter = FALSE,
-  thresh = 1.96, cramer = FALSE)
+chiperm(
+  data,
+  B = 999,
+  resid = FALSE,
+  filter = FALSE,
+  thresh = 1.96,
+  cramer = FALSE
+)
 }
 \arguments{
 \item{data}{Dataframe containing the input contingency table.}

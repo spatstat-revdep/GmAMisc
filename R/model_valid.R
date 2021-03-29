@@ -146,10 +146,10 @@ modelvalid <- function(data, fit, B=200, g=10, oneplot=TRUE, excludeInterc=FALSE
   colnames(pvalues.matrix) <- names(coefficients(fit))
 
   #calculate the auc of the full model
-  auc.full <- pROC::roc(data[,1], data$pred.prob.full, data=data)$auc
+  auc.full <- pROC::roc(data[,1], data$pred.prob.full, data=data, quiet=TRUE)$auc
 
   #calculate the p-value of the HL test on the full dataset
-  hl.full <- HosmerLemeshowTest(fitted(fit), fit$y)$H$p.value
+  hl.full <- DescTools::HosmerLemeshowTest(fitted(fit), fit$y)$H$p.value
 
   #set the progress bar to be used inside the loop
   pb <- txtProgressBar(min = 0, max = B, style = 3)
@@ -159,7 +159,7 @@ modelvalid <- function(data, fit, B=200, g=10, oneplot=TRUE, excludeInterc=FALSE
     #split the sample in a random part, corresponding to the 75percent of the full sample
     #observations in the input dataset are given TRUE or FALSE according to whether they are (randomly) selected as belonging to the
     #training or to the testing partition
-    sample <- sample.split(data[,1], SplitRatio = .75)
+    sample <- caTools::sample.split(data[,1], SplitRatio = .75)
 
     #assign to the training partition the observations flagged are TRUE
     train <- subset(data, sample == TRUE)
@@ -189,17 +189,17 @@ modelvalid <- function(data, fit, B=200, g=10, oneplot=TRUE, excludeInterc=FALSE
     #roc requires pROC; calculate the AUC fitting values
     #the performance of the model fitted on the fitting partition is evaluated on the fitting portion itself
     #AND (see below) on the testing portion
-    auc.train[i] <- pROC::roc(train[,1], train$pred.prob, data=train)$auc
+    auc.train[i] <- pROC::roc(train[,1], train$pred.prob, data=train, quiet=TRUE)$auc
 
     #calculate the AUC  validation values
     #the performance of the model fitted to the fitting portion (see above) is also evaluated on validation portion
-    auc.test[i] <- pROC::roc(test[,1], test$pred.prob.back, data=test)$auc
+    auc.test[i] <- pROC::roc(test[,1], test$pred.prob.back, data=test, quiet=TRUE)$auc
 
     #calculate the p-value of the HL test on the training (=fitting) portion
-    hl.train[i] <- HosmerLemeshowTest(fit=train$pred.prob, obs=train[,1], ngr=g)$H$p.value
+    hl.train[i] <- DescTools::HosmerLemeshowTest(fit=train$pred.prob, obs=train[,1], ngr=g)$H$p.value
 
     #calculate the p-value of the HL test on the testing (=validation) portion
-    hl.test[i] <- HosmerLemeshowTest(fit=test$pred.prob.back, obs=test[,1], ngr=g)$H$p.value
+    hl.test[i] <- DescTools::HosmerLemeshowTest(fit=test$pred.prob.back, obs=test[,1], ngr=g)$H$p.value
 
     setTxtProgressBar(pb, i)
   }
@@ -311,14 +311,14 @@ modelvalid <- function(data, fit, B=200, g=10, oneplot=TRUE, excludeInterc=FALSE
 
   #boxplot of the randomized coefficients distribution
   graphics::boxplot(coeff.matrix,
-          names=paste0(names(coefficients(fit)), p.valued.labls.df$indicator),
-          main=paste0("Boxplots of parameters distribution across ", B, " iterations", "\nn= ", nrow(data) * 0.75, " (75% of the full sample)"),
-          sub="Starred parameters have p-value < 0.05 in at least 95% of the iterations",
-          cex.main=0.95,
-          cex.sub=0.75,
-          cex.axis=0.7,
-          ylim=c(ylimlower, ylimupper),
-          las=2)
+                    names=paste0(names(coefficients(fit)), p.valued.labls.df$indicator),
+                    main=paste0("Boxplots of parameters distribution across ", B, " iterations", "\nn= ", nrow(data) * 0.75, " (75% of the full sample)"),
+                    sub="Starred parameters have p-value < 0.05 in at least 95% of the iterations",
+                    cex.main=0.95,
+                    cex.sub=0.75,
+                    cex.axis=0.7,
+                    ylim=c(ylimlower, ylimupper),
+                    las=2)
 
   abline(h=0, lty=2, col="grey")
 

@@ -4,7 +4,9 @@
 \name{Massachusetts}
 \alias{Massachusetts}
 \title{Dataset: Massachusetts state limit}
-\format{SpatialPolygonsDataFrame}
+\format{
+SpatialPolygonsDataFrame
+}
 \usage{
 data(Massachusetts)
 }

@@ -5,8 +5,14 @@
 \title{R function to model (and test) the dependence of a point pattern on the distance to another
 pattern}
 \usage{
-distCovarModel(feature, cov.var, studyplot = NULL, buffer = 0,
-  Foxall = FALSE, oneplot = FALSE)
+distCovarModel(
+  feature,
+  cov.var,
+  studyplot = NULL,
+  buffer = 0,
+  Foxall = FALSE,
+  oneplot = FALSE
+)
 }
 \arguments{
 \item{feature}{Feature (of point type; SpatialPointsDataFrame class) representing the spatial
@@ -109,7 +115,7 @@ results <- distCovarModel(locations, springs)
 }
 \seealso{
 \code{\link{distRandSign}} , \code{\link{Aindex}} , \code{\link{pointsCovarModel}} ,
- \code{\link[spatstat]{auc}} , \code{\link[spatstat]{cdf.test}} ,
- \code{\link[spatstat]{effectfun}} , \code{\link[spatstat]{ppm}} , \code{\link[spatstat]{roc}}
+ \code{\link[spatstat.core]{auc}} , \code{\link[spatstat.core]{cdf.test}} ,
+ \code{\link[spatstat.core]{effectfun}} , \code{\link[spatstat.core]{ppm}} , \code{\link[spatstat.core]{roc}}
 }
 \keyword{distCovarModel}

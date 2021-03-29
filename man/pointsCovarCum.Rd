@@ -5,8 +5,14 @@
 \title{R function to plot the cumulative distribution (and acceptance interval) of the values of a
 spatial covariate measured at the locations of a point pattern}
 \usage{
-pointsCovarCum(feature, cov.var, studyplot = NULL, B = 200,
-  cov.var.name = NULL, oneplot = TRUE)
+pointsCovarCum(
+  feature,
+  cov.var,
+  studyplot = NULL,
+  B = 200,
+  cov.var.name = NULL,
+  oneplot = TRUE
+)
 }
 \arguments{
 \item{feature}{Feature (of point type; 'SpatialPointsDataFrame' class) representing the spatial
@@ -71,7 +77,7 @@ data(Massachusetts)
 data(popdensity)
 
 results <- pointsCovarCum(feature=Starbucks, cov.var=popdensity, studyplot=Massachusetts,
-cov.var.name="population density")
+cov.var.name="population density", B=10)
 
 }
 \seealso{

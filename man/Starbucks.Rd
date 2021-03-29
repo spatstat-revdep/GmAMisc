@@ -4,7 +4,9 @@
 \name{Starbucks}
 \alias{Starbucks}
 \title{Dataset: location of Starbucks in Massachusetts}
-\format{SpatialPointsDataFrame}
+\format{
+SpatialPointsDataFrame
+}
 \usage{
 data(Starbucks)
 }

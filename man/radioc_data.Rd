@@ -4,7 +4,9 @@
 \name{radioc_data}
 \alias{radioc_data}
 \title{Dataset: Posterior Probabilities for the Starting and Ending boundaries of two 14C phases}
-\format{A data frame with 680 rows and 3 variables}
+\format{
+A data frame with 680 rows and 3 variables
+}
 \usage{
 data(radioc_data)
 }

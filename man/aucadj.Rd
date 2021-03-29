@@ -4,7 +4,7 @@
 \alias{aucadj}
 \title{R function for optimism-adjusted AUC (internal validation)}
 \usage{
-aucadj(data, fit, B)
+aucadj(data, fit, B = 200)
 }
 \arguments{
 \item{data}{Dataframe containing the dataset (note: the Dependent Variable must be stored in the
@@ -12,7 +12,7 @@ first column to the left).}
 
 \item{fit}{Object returned from glm() function.}
 
-\item{B}{Desired number of bootstrap resamples (suggested values: 100 or 200).}
+\item{B}{Desired number of bootstrap resamples (suggested values: 100 or 200; the latter is used by default).}
 }
 \value{
 The returned boxplots represent:\cr -the distribution of the AUC value in the bootstrap

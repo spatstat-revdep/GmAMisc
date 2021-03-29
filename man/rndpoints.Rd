@@ -4,7 +4,9 @@
 \name{rndpoints}
 \alias{rndpoints}
 \title{Dataset: random points}
-\format{SpatialPointsDataFrame}
+\format{
+SpatialPointsDataFrame
+}
 \usage{
 data(rndpoints)
 }

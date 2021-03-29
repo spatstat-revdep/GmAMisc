@@ -73,7 +73,7 @@ kwPlot <- function (x, y, strip=FALSE, notch=FALSE, omm=FALSE, outl=TRUE, postho
   } else {
   }
   if (posthoc==TRUE) {
-    res <- DunnTest(data[,1], data[,2], method=adjust) #requires 'DescTools' package; note: since version 0.99.17, the DunnTest function returns 2-sided p values by default
+    res <- DescTools::DunnTest(data[,1], data[,2], method=adjust) #requires 'DescTools' package; note: since version 0.99.17, the DunnTest function returns 2-sided p values by default
     res1 <- res[[1]]
     data.f <- data.frame(pair=row.names(res1), res1, row.names = NULL)
     dotchart2(data.f$pval, labels = data.f$pair, sort. = FALSE, lty = 2, xlim = c(0, 1), xlab = paste0("2-sided p-value with ", adjust, " correction (red reference line set at 0.05)\n", "(Kruskal-Wallis H=", H, ", df=", degree.freed ,", p=", p,")")) #requires 'Hmisc' package

@@ -4,7 +4,9 @@
 \name{polygons}
 \alias{polygons}
 \title{Dataset: location of fictional polygons}
-\format{SpatialPolygonsDataFrame}
+\format{
+SpatialPolygonsDataFrame
+}
 \usage{
 data(polygons)
 }

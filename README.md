@@ -1,5 +1,5 @@
 # GmAMisc (Gianmarco Alberti Miscellaneous)
-vers 1.1.1
+vers 1.2.0
 
 `GmAMisc` contains many functions useful for univariate outlier detection, permutation-based t-test, permutation-based chi-square test, visualization of residuals, and bootstrap Cramer's V, plotting of the results of the Mann-Whitney and Kruskall-Wallis test, calculation of Brainerd-Robinson similarity coefficient and subsequent clustering, validation of logistic regression models, optimism-corrected AUC, robust Bland-Altman plot, calculation of posterior probability for different chronological relationships between two Bayesian radiocarbon phases, point pattern analysis, landform classification, clustering of spatial features.
 
@@ -488,6 +488,9 @@ The function returns:
 <br>
 
 ## History
+`version 1.2.0`:
+* changes to the code of some functions in order to adapt them to the new structure of the 'spatstat' package (as of spatstat 2.0-0).
+
 `version 1.1.1`: 
 * minor fixes to the help documentation.
 

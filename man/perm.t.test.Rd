@@ -4,8 +4,7 @@
 \alias{perm.t.test}
 \title{R function for permutation-based t-test}
 \usage{
-perm.t.test(data, format, sample1.lab = NULL, sample2.lab = NULL,
-  B = 999)
+perm.t.test(data, format, sample1.lab = NULL, sample2.lab = NULL, B = 999)
 }
 \arguments{
 \item{data}{Dataframe containing the data.}

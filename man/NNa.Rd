@@ -4,8 +4,14 @@
 \alias{NNa}
 \title{R function for Nearest Neighbor analysis of point patterns}
 \usage{
-NNa(feature, studyplot = NULL, buffer = 0, B = 199, cov.var = NULL,
-  addmap = TRUE)
+NNa(
+  feature,
+  studyplot = NULL,
+  buffer = 0,
+  B = 199,
+  cov.var = NULL,
+  addmap = TRUE
+)
 }
 \arguments{
 \item{feature}{Feature dataset (of point type; SpatialPointsDataFrame class).}
@@ -57,14 +63,14 @@ clustered pattern; right tail, indicating a significant dispersed pattern).\cr
 \examples{
 data(springs)
 
-#perform the analysis with B set to 99; the result points to a significant clustering
-res <- NNa(springs, B=99)
+#perform the analysis with B set to 19; the result points to a significant clustering
+res <- NNa(springs, B=19)
 
 data(Starbucks)
 data(popdensity)
 
 #perform the analysis, while controlling for the effect of the population density covariate
-res <- NNa(Starbucks, cov.var=popdensity, B=99)
+res <- NNa(Starbucks, cov.var=popdensity, B=19)
 
 }
 \seealso{

@@ -4,7 +4,9 @@
 \name{popdensity}
 \alias{popdensity}
 \title{Dataset: Massachusetts population density}
-\format{RasterLayer}
+\format{
+RasterLayer
+}
 \usage{
 data(popdensity)
 }

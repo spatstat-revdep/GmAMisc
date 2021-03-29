@@ -75,18 +75,18 @@
 #'
 #' data(faults)
 #'
-#' #perform the analysis using 50 iterations and
+#' #perform the analysis using 25 iterations and
 #' #the default randomization-based approach
-#' distRandCum(from.feat=springs, to.feat=faults, B=50)
+#' distRandCum(from.feat=springs, to.feat=faults, B=5)
 #'
 #' data("malta_polyg") # load a sample polygon
 #'
 #' #perform the analysis; since both patterns are of point type but the 'type' parameter is left
 #' #in its default value ('rand'), the randomization-based approach is used
-#' distRandCum(springs, points, studyplot=malta_polyg, B=50)
+#' distRandCum(springs, points, studyplot=malta_polyg, B=5)
 #'
 #' #same as above, but using the permutation-based approach
-#' distRandCum(springs, points, studyplot=malta_polyg, type="perm", B=50)
+#' distRandCum(springs, points, studyplot=malta_polyg, type="perm", B=5)
 #'
 #' @seealso \code{\link{distRandSign}}
 #'

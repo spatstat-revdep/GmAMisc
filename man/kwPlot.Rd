@@ -4,8 +4,16 @@
 \alias{kwPlot}
 \title{R function for visually displaying Kruskal-Wallis test's results}
 \usage{
-kwPlot(x, y, strip = FALSE, notch = FALSE, omm = FALSE,
-  outl = TRUE, posthoc = FALSE, adjust = "bonferroni")
+kwPlot(
+  x,
+  y,
+  strip = FALSE,
+  notch = FALSE,
+  omm = FALSE,
+  outl = TRUE,
+  posthoc = FALSE,
+  adjust = "bonferroni"
+)
 }
 \arguments{
 \item{x}{Object storing the values to be analysed.}

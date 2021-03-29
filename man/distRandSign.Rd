@@ -5,8 +5,15 @@
 \title{R function to test for a significant spatial association between two features (points-to-points,
 points-to-lines, points-to-polygons)}
 \usage{
-distRandSign(from.feat, to.feat, studyplot = NULL, buffer = 0,
-  B = 199, oneplot = TRUE, export = FALSE)
+distRandSign(
+  from.feat,
+  to.feat,
+  studyplot = NULL,
+  buffer = 0,
+  B = 199,
+  oneplot = TRUE,
+  export = FALSE
+)
 }
 \arguments{
 \item{from.feat}{Feature (of point type; SpatialPointsDataFrame class) whose spatial association
@@ -103,9 +110,9 @@ permutation-based routine that has been detailed above.\cr
 
 The function also produces a map showing the study area, the from- and the to-features.
 The from-features are given a colour according to whether or not their minimum distance to
-the nearest to-feature is smaller (GREEN) or larger (RED) than the 0.025 and 0.975 (respectively)
-of the distribution of the randomized average distances. This information is also reported in
-a new field that is appended to the input dataset.
+the nearest to-feature is smaller (GREEN) or larger (RED) than the 0.025 and 0.975 quantile
+(respectively) of the distribution of the randomized average distances.
+This information is also reported in a new field that is appended to the input dataset.
 Optionally, the input dataset (with 2 new columns added) can be exported using the 'export'parameter.
 The new columns store: the features' minimum distance to the nearest to-feature;
 a string indicating if the corresponding feature is closer or more distant than expected to the
@@ -117,13 +124,13 @@ data(faults)
 
 #calculate the significance of the spatial association between springs and geological
 #fault-lines; plots displayed in a single panel
-result <- distRandSign(from.feat=springs, to.feat=faults, oneplot=TRUE, B=49)
+result <- distRandSign(from.feat=springs, to.feat=faults, oneplot=TRUE, B=19)
 
 data(points)
 data(polygons)
 
 #calculate the significance of the spatial association between points and polygons
-result <- distRandSign(from.feat=points, to.feat=polygons, oneplot=FALSE, B=49)
+result <- distRandSign(from.feat=points, to.feat=polygons, oneplot=FALSE, B=19)
 
 }
 \seealso{

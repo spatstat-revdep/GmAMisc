@@ -4,8 +4,14 @@
 \alias{robustBAplot}
 \title{R function to plot a robust version of the Bland-Altman plot}
 \usage{
-robustBAplot(a, b, z = 1.96, methAlab = "Method A",
-  methBlab = "Method B", cex = 0.6)
+robustBAplot(
+  a,
+  b,
+  z = 1.96,
+  methAlab = "Method A",
+  methBlab = "Method B",
+  cex = 0.6
+)
 }
 \arguments{
 \item{a}{Vector storing the first set of measurements to be compared.}

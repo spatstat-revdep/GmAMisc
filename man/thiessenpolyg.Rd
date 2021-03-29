@@ -4,7 +4,9 @@
 \name{thiessenpolyg}
 \alias{thiessenpolyg}
 \title{Dataset: Thiessen polygons around the points represented in the 'locations' dataset}
-\format{SpatialPolygonsDataFrame}
+\format{
+SpatialPolygonsDataFrame
+}
 \usage{
 data(thiessenpolyg)
 }

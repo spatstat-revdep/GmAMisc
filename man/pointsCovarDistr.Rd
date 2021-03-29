@@ -5,8 +5,7 @@
 \title{R function to plot the frequency distribution of the average value of a
 spatial covariate measured at randomized locations}
 \usage{
-pointsCovarDistr(feature, cov.var, studyplot = NULL, B = 199,
-  oneplot = TRUE)
+pointsCovarDistr(feature, cov.var, studyplot = NULL, B = 199, oneplot = TRUE)
 }
 \arguments{
 \item{feature}{Feature (of point type; 'SpatialPointsDataFrame' class) representing the spatial
@@ -59,7 +58,7 @@ data(malta_polyg)
 #load the raster representing the terrain elevation, to be used as covariate
 data(malta_dtm_40)
 
-pointsCovarDistr(feature=springs, cov.var=malta_dtm_40, studyplot=malta_polyg)
+pointsCovarDistr(feature=springs, cov.var=malta_dtm_40, studyplot=malta_polyg, B=19)
 
 }
 \seealso{

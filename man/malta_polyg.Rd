@@ -4,7 +4,9 @@
 \name{malta_polyg}
 \alias{malta_polyg}
 \title{Dataset: Malta polygon}
-\format{SpatialPolygonsDataFrame}
+\format{
+SpatialPolygonsDataFrame
+}
 \usage{
 data(malta_polyg)
 }

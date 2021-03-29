@@ -4,7 +4,9 @@
 \name{faults}
 \alias{faults}
 \title{Dataset: geological fault-lines in Malta}
-\format{SpatialLinesDataFrame}
+\format{
+SpatialLinesDataFrame
+}
 \usage{
 data(faults)
 }

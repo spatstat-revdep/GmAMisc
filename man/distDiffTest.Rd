@@ -5,8 +5,14 @@
 \title{R function for testing the difference in distance of two point feature datasets to
 a target feature dataset}
 \usage{
-distDiffTest(feat1, feat2, to.feat, feat1.lab = NULL, feat2.lab = NULL,
-  B = 999)
+distDiffTest(
+  feat1,
+  feat2,
+  to.feat,
+  feat1.lab = NULL,
+  feat2.lab = NULL,
+  B = 999
+)
 }
 \arguments{
 \item{feat1}{Point pattern to be tested (of point type; 'SpatialPointsDataFrame' class).}
@@ -27,7 +33,7 @@ The frequency histogram returned by the function displays the distribution of th
 permuted mean difference between the two samples; a solid dot indicates the observed mean
 difference, while an hollow dot represents the mean of the permuted differences.
 Two dashed blue lines indicates the 0.025 and 0.975 percentile of the permuted
-distribution. A rug plot at the bottom histgram indicates the individual permuted mean
+distribution. A rug plot at the bottom histogram indicates the individual permuted mean
 differences. At the bottom of the chart, some information are displayed.
 In particular, the observed mean difference and the permuted p-values are reported.
 In the last row, the result of the regular (parametric) t-test (both assuming and

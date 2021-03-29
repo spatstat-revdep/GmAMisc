@@ -4,7 +4,9 @@
 \name{deaths}
 \alias{deaths}
 \title{Dataset: location of cholera deaths in London (after Dr Snow's mid-1800s study of cholera outbreak in Soho).}
-\format{SpatialPointsDataFrame}
+\format{
+SpatialPointsDataFrame
+}
 \usage{
 data(deaths)
 }

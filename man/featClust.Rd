@@ -4,10 +4,19 @@
 \alias{featClust}
 \title{R function for features clustering on the basis of distances/area}
 \usage{
-featClust(x, to.feat = NULL, aggl.meth = "ward.D2", part = NULL,
-  showID = TRUE, oneplot = TRUE, cex.dndr.lab = 0.85,
-  cex.sil.lab = 0.75, cex.feat.lab = 0.65, col.feat.lab = "black",
-  export = FALSE)
+featClust(
+  x,
+  to.feat = NULL,
+  aggl.meth = "ward.D2",
+  part = NULL,
+  showID = TRUE,
+  oneplot = TRUE,
+  cex.dndr.lab = 0.85,
+  cex.sil.lab = 0.75,
+  cex.feat.lab = 0.65,
+  col.feat.lab = "black",
+  export = FALSE
+)
 }
 \arguments{
 \item{x}{Dataset whose feature are to be clustered; either points (SpatialPointsDataFrame class)

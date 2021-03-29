@@ -4,7 +4,9 @@
 \name{events}
 \alias{events}
 \title{Dataset: location of fictional events}
-\format{SpatialPointsDataFrame}
+\format{
+SpatialPointsDataFrame
+}
 \usage{
 data(events)
 }

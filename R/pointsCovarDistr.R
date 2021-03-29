@@ -50,7 +50,7 @@
 #' #load the raster representing the terrain elevation, to be used as covariate
 #' data(malta_dtm_40)
 #'
-#'pointsCovarDistr(feature=springs, cov.var=malta_dtm_40, studyplot=malta_polyg)
+#'pointsCovarDistr(feature=springs, cov.var=malta_dtm_40, studyplot=malta_polyg, B=19)
 #'
 #' @seealso \code{\link{pointsCovarModel}}, \code{\link{pointsCovarCum}}
 #'

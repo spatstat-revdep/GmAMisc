@@ -4,7 +4,9 @@
 \name{springs}
 \alias{springs}
 \title{Dataset: location of springs in Malta}
-\format{SpatialPointsDataFrame}
+\format{
+SpatialPointsDataFrame
+}
 \usage{
 data(springs)
 }

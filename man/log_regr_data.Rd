@@ -4,7 +4,9 @@
 \name{log_regr_data}
 \alias{log_regr_data}
 \title{Dataset: admission to graduate school}
-\format{A data frame with 400 rows and 4 variables}
+\format{
+A data frame with 400 rows and 4 variables
+}
 \usage{
 data(log_regr_data)
 }

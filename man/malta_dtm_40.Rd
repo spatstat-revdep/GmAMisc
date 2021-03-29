@@ -4,7 +4,9 @@
 \name{malta_dtm_40}
 \alias{malta_dtm_40}
 \title{Dataset: Malta DTM (40m cell size)}
-\format{RasterLayer}
+\format{
+RasterLayer
+}
 \usage{
 data(malta_dtm_40)
 }

@@ -4,9 +4,19 @@
 \alias{BRsim}
 \title{R function for Brainerd-Robinson similarity coefficient (and optional clustering)}
 \usage{
-BRsim(data, which = "rows", correction = FALSE, rescale = TRUE,
-  clust = TRUE, part = NULL, aggl.meth = "ward.D2", oneplot = TRUE,
-  cex.dndr.lab = 0.85, cex.sil.lab = 0.75, cex.dot.plt.lab = 0.8)
+BRsim(
+  data,
+  which = "rows",
+  correction = FALSE,
+  rescale = TRUE,
+  clust = TRUE,
+  part = NULL,
+  aggl.meth = "ward.D2",
+  oneplot = TRUE,
+  cex.dndr.lab = 0.85,
+  cex.sil.lab = 0.75,
+  cex.dot.plt.lab = 0.8
+)
 }
 \arguments{
 \item{data}{Dataframe containing the dataset (note: assemblages in rows, variables in columns).}

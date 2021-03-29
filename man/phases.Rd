@@ -4,7 +4,9 @@
 \name{phases}
 \alias{phases}
 \title{Dataset: Posterior Probabilities for the chronological relation of the Starting and Ending boundaries of two Bayesian independent 14C phases}
-\format{A data frame with 4 rows and 5 variables}
+\format{
+A data frame with 4 rows and 5 variables
+}
 \usage{
 data(phases)
 }

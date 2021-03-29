@@ -5,10 +5,18 @@
 \title{R function to calculate the Posterior Probability for different chronological relations between
 two Bayesian radiocarbon phases}
 \usage{
-prob.phases.relat(data = NULL, sAoldersB = NULL, sAoldereB = NULL,
-  eAoldersB = NULL, eAoldereB = NULL, sBoldersA = NULL,
-  sBoldereA = NULL, eBoldersA = NULL, eBoldereA = NULL,
-  sort = FALSE)
+prob.phases.relat(
+  data = NULL,
+  sAoldersB = NULL,
+  sAoldereB = NULL,
+  eAoldersB = NULL,
+  eAoldereB = NULL,
+  sBoldersA = NULL,
+  sBoldereA = NULL,
+  eBoldersA = NULL,
+  eBoldereA = NULL,
+  sort = FALSE
+)
 }
 \arguments{
 \item{data}{Matrix containing the posterior probability of the chronological relation between

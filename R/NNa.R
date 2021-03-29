@@ -42,20 +42,21 @@
 #'
 #' @export
 #'
-#' @importFrom spatstat area rpoint
+#' @importFrom spatstat.core rpoint
+#' @importFrom spatstat.geom area
 #' @import maptools
 #'
 #' @examples
 #' data(springs)
 #'
-#' #perform the analysis with B set to 99; the result points to a significant clustering
-#' res <- NNa(springs, B=99)
+#' #perform the analysis with B set to 19; the result points to a significant clustering
+#' res <- NNa(springs, B=19)
 #'
 #' data(Starbucks)
 #' data(popdensity)
 #'
 #' #perform the analysis, while controlling for the effect of the population density covariate
-#' res <- NNa(Starbucks, cov.var=popdensity, B=99)
+#' res <- NNa(Starbucks, cov.var=popdensity, B=19)
 #'
 #' @seealso \code{\link{refNNa}}
 #'
@@ -98,7 +99,7 @@ NNa <- function(feature, studyplot=NULL, buffer=0, B=199, cov.var=NULL, addmap=T
     }
 
     #calculate the density of points
-    pointdensity <- length(feature) / spatstat::area(region)
+    pointdensity <- length(feature) / spatstat.geom::area(region)
 
     #calculate the observed R value, and store it
     obs.Rindex <- obs.NNdist / (1/(2*sqrt(pointdensity)))
@@ -118,10 +119,10 @@ NNa <- function(feature, studyplot=NULL, buffer=0, B=199, cov.var=NULL, addmap=T
   } else {
 
     #tranform the cov.var from a RasterLayer to an object of class im, which is needed by spatstat
-    cov.var.im <- spatstat::as.im(cov.var)
+    cov.var.im <- spatstat.geom::as.im(cov.var)
 
     #calculate the density of points
-    pointdensity <- length(feature) / spatstat::area(cov.var.im)
+    pointdensity <- length(feature) / spatstat.geom::area(cov.var.im)
 
     #calculate the observed R value, and store it
     obs.Rindex <- obs.NNdist / (1/(2*sqrt(pointdensity)))

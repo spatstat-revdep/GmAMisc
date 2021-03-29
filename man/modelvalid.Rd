@@ -4,8 +4,7 @@
 \alias{modelvalid}
 \title{R function for binary Logistic Regression internal validation}
 \usage{
-modelvalid(data, fit, B = 200, g = 10, oneplot = TRUE,
-  excludeInterc = FALSE)
+modelvalid(data, fit, B = 200, g = 10, oneplot = TRUE, excludeInterc = FALSE)
 }
 \arguments{
 \item{data}{Dataframe containing the dataset (Dependent Variable must be stored in the first

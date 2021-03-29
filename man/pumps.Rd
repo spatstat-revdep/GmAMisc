@@ -4,7 +4,9 @@
 \name{pumps}
 \alias{pumps}
 \title{Dataset: location of public water pumps in London (after Dr Snow's mid-1800s study of cholera outbreak in Soho).}
-\format{SpatialPointsDataFrame}
+\format{
+SpatialPointsDataFrame
+}
 \usage{
 data(pumps)
 }

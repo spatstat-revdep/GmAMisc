@@ -61,7 +61,7 @@
 #' data(popdensity)
 #'
 #' results <- pointsCovarCum(feature=Starbucks, cov.var=popdensity, studyplot=Massachusetts,
-#' cov.var.name="population density")
+#' cov.var.name="population density", B=10)
 #'
 #' @seealso \code{\link{pointsCovarModel}}
 #'

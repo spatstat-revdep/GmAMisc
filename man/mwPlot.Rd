@@ -4,8 +4,17 @@
 \alias{mwPlot}
 \title{R function for visually displaying Mann-Whitney test's results}
 \usage{
-mwPlot(x, y, xlabl = "x", ylabl = "y", strip = FALSE,
-  notch = FALSE, omm = FALSE, outl = TRUE, HL = FALSE)
+mwPlot(
+  x,
+  y,
+  xlabl = "x",
+  ylabl = "y",
+  strip = FALSE,
+  notch = FALSE,
+  omm = FALSE,
+  outl = TRUE,
+  HL = FALSE
+)
 }
 \arguments{
 \item{x}{Object storing the values of the first group being compared.}

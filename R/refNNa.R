@@ -32,14 +32,14 @@
 #'
 #' @export
 #'
-#' @importFrom spatstat nndist
+#' @importFrom spatstat.geom nndist
 #'
 #' @examples
 #' data(springs)
 #'
 #' #produces a plot representing the cumulative nearest neighbour distance distribution;
-#' #an acceptance interval based on 99 randomized simulations is also shown.
-#' refNNa(springs, B=99)
+#' #an acceptance interval based on 19 randomized simulations is also shown.
+#' refNNa(springs, B=19)
 #'
 #' #load the Startbucks datset
 #' data(Starbucks)
@@ -48,7 +48,7 @@
 #' data(popdensity)
 #'
 #' #perform the analysis, controlling for the 1st order effect
-#' refNNa(Starbucks, cov.var=popdensity, B=99)
+#' refNNa(Starbucks, cov.var=popdensity, B=19)
 #'
 #' @seealso \code{\link{NNa}}
 #'
@@ -69,7 +69,7 @@ refNNa <- function (feature, studyplot=NULL, buffer=0, B=200, cov.var=NULL, orde
   } else {
 
     #tranform the cov.var from a RasterLayer to an object of class im, which is needed by spatstat
-    cov.var.im <- spatstat::as.im(cov.var)
+    cov.var.im <- spatstat.geom::as.im(cov.var)
   }
 
   #for each point in the input feature dataset, calculate the distance to its nearest neighbor
