@@ -484,21 +484,3 @@ The x-axis displays the median of the two variables being compared, while the y-
 The function returns:
 * a plot displaying the decay in angular size as function of the object's distance from the observer; a black dot represents the distance at which the angular size hits the limit of human visual acuity;
 * the value (in km) of the visibility limit.
-
-<br>
-
-## History
-`version 1.2.0`:
-* changes to the code of some functions in order to adapt them to the new structure of the 'spatstat' package (as of spatstat 2.0-0).
-
-`version 1.1.1`: 
-* minor fixes to the help documentation.
-
-`version 1.1.0`: 
-* minor corrections to the components in the list returned by the `NNa()` function; 
-* change in the output of the `perm.t.test()` function, which now produces a frequency distribution histogram; 1-sided permuted p-values are now also reported; user-defined labels for the two samples being tested can be used.
-* `distRandSign()`: in the map of from- and to-features, from-features are given a colour according to whether or not they are closer or more distant than expected to the nearest to-feature; users can now 'export' as a shapefile the input dataset featuring 2 new fields: one storing each feature's distance to the nearest to-feature; one containing a string indicating if the corresponding feature is closer or more distant than expected.
-* New function added: `distDiffTest()`, `pointsCovarDistr()`.
-
-`version 1.0.0`: 
-first release to CRAN

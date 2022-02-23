@@ -1,4 +1,9 @@
+# GmAMisc 1.2.1:
+
+* changes to the code of some functions in order to adapt them to the new package 'spatstat.random' and remove unneeded dependecies.
+
 # GmAMisc 1.2.0:
+
 * changes to the code of some functions in order to adapt them to the new structure of the 'spatstat' package (as of spatstat 2.0-0).
 
 # GmAMisc 1.1.1:

@@ -1,9 +1,9 @@
-fe838378a591d3445356e06a404e3e1e *DESCRIPTION
-f7df58000310967b5a0c9420376ea35b *NAMESPACE
-8902d9ff712bc7194b392b5335010553 *NEWS.md
-294b57f9cfce6697926999b0c9f2b8c6 *R/Aindex.R
+9b521bec3d44e78544e3eca41d64cda3 *DESCRIPTION
+4139e4811a54e990151afb9df9f21ef6 *NAMESPACE
+5da1143128226af648760e25dd749ef2 *NEWS.md
+6dd4d334aa6a21430b2bd249a32e1db8 *R/Aindex.R
 96bb7cb5917b0a1976158523b72d29ed *R/Massachusetts.r
-6e961a0e39774a9567ecbf4949f97c7e *R/NNa.R
+60c26bd295a552bad9543765767f2f34 *R/NNa.R
 f23e79c4dd53e8519a1ba64c63495895 *R/PointsToPointsTess.R
 3284f7a996b1f1c68e6470c64b059003 *R/Starbucks.r
 b9c3e531ae3744dbaaaaed534ea0ee41 *R/assemblage.r
@@ -11,7 +11,7 @@ b9c3e531ae3744dbaaaaed534ea0ee41 *R/assemblage.r
 87c5b90f7ec20de3f31e311e00b55e77 *R/brsim.r
 c11d4ac413b1f35d5a7c98ffcad90a53 *R/chi_perm.r
 97f6b2f7a05d355ebb74356a5190a054 *R/deaths.r
-12a235ef278e5adac1b9fa53d849a12a *R/distCovarModel.R
+293038b68dd38115ad78392cc36a89df *R/distCovarModel.R
 165bd9aa0da4901df36de929fc8dde78 *R/distDiffTest.R
 c730e35ebcd6ae85602ec1a3b2999380 *R/distRandCum.R
 e6c7e6bb211cebd37d2c8dd500589dd4 *R/distRandSign.R
@@ -50,7 +50,7 @@ ec1ae566778220868650b0b8c00b4b14 *R/robust_BA_plot.R
 cb07c0ff174c50b8e88f757ce3949e97 *R/springs.r
 fda721c5346d611af7d7fc3769d2a033 *R/thiessenpolyg.r
 f15b2ddd68c1c60d8d3641ea76998380 *R/vislim.R
-c6a1a33dd8cb81dca30c6a9062b64eef *README.md
+dab17acc38b27719fdb36b03114cd233 *README.md
 c2606df84038d8e6ba9ee98a8917c69e *data/Massachusetts.rda
 457105f22fe5733e280131b1a18d32e1 *data/Starbucks.rda
 d7671095081800fe4277066daf33786d *data/assemblage.rda

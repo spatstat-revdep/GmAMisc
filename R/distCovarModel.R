@@ -84,10 +84,9 @@
 #'
 #' @importFrom rgeos gConvexHull gDistance gBuffer
 #' @importFrom spatstat.core auc cdf.test effectfun Jfox ppm
-#' @importFrom spatstat.geom as.ppp as.psp distfun unmark Window
+#' @importFrom spatstat.geom as.ppp as.psp distfun unmark Window Window<-
 #' @importFrom stats anova
 #' @importFrom maptools as.owin.SpatialPolygons
-#' @import spatstat.geom spatstat.core spatstat.linnet spatstat
 #'
 #' @examples
 #'

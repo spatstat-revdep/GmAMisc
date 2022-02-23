@@ -121,7 +121,7 @@ Aindex <- function(x, y, studyplot=NULL, B=199, addmap=FALSE){
     index <- sample(1: (nx + ny), size=nx, replace=F)
     #extract from the pooledData matrix the rows corresponding to the generated random index
     x.perm <- pooledData[index,]
-    #extract from the pooledData matrix all the rows that does not correspond to the random index
+    #extract from the pooledData matrix all the rows that do not correspond to the random index
     #the procedure eventually creates two sets of points randomly shuffling the entries of the pooledData matrix
     y.perm <- pooledData[-index,]
 
