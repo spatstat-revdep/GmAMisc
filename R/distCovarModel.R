@@ -83,7 +83,8 @@
 #' @export
 #'
 #' @importFrom rgeos gConvexHull gDistance gBuffer
-#' @importFrom spatstat.core auc cdf.test effectfun Jfox ppm
+#' @importFrom spatstat.explore auc cdf.test Jfox roc
+#' @importFrom spatstat.model effectfun ppm
 #' @importFrom spatstat.geom as.ppp as.psp distfun unmark Window Window<-
 #' @importFrom stats anova
 #' @importFrom maptools as.owin.SpatialPolygons
@@ -101,8 +102,8 @@
 #' results <- distCovarModel(locations, springs)
 #'
 #' @seealso \code{\link{distRandSign}} , \code{\link{Aindex}} , \code{\link{pointsCovarModel}} ,
-#'  \code{\link[spatstat.core]{auc}} , \code{\link[spatstat.core]{cdf.test}} ,
-#'  \code{\link[spatstat.core]{effectfun}} , \code{\link[spatstat.core]{ppm}} , \code{\link[spatstat.core]{roc}}
+#'  \code{\link[spatstat.explore]{auc}} , \code{\link[spatstat.explore]{cdf.test}} ,
+#'  \code{\link[spatstat.model]{effectfun}} , \code{\link[spatstat.model]{ppm}} , \code{\link[spatstat.explore]{roc}}
 #'
 distCovarModel <- function(feature, cov.var, studyplot=NULL, buffer=0, Foxall=FALSE, oneplot=FALSE){
   options(scipen=999)
@@ -154,7 +155,7 @@ distCovarModel <- function(feature, cov.var, studyplot=NULL, buffer=0, Foxall=FA
   Jfunction <- Jfox(feature.ppp, cov.var.ppp)
 
   #calculate the AUC
-  areaundercurve <- spatstat.core::auc(feature.ppp, distance.fun, high=FALSE)
+  areaundercurve <- spatstat.explore::auc(feature.ppp, distance.fun, high=FALSE)
 
   #compare the models via likelihood ratio test
   model.comp <- anova(PPM0, PPM1, test="LRT")
@@ -196,7 +197,7 @@ distCovarModel <- function(feature, cov.var, studyplot=NULL, buffer=0, Foxall=FA
   }
 
   #plot the ROC curve
-  graphics::plot(spatstat.core::roc(PPM1),
+  graphics::plot(spatstat.explore::roc(PPM1),
        main=paste0("ROC curve of the fitted intensity of point patter \nas (loglinear) function of the 'distance' cavariate \nAUC: ", round(areaundercurve,3)),
        cex.main=0.8)
 

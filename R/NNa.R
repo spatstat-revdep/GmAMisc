@@ -43,7 +43,7 @@
 #' @export
 #'
 #' @importFrom spatstat.random rpoint
-#' @importFrom spatstat.geom area
+#' @importFrom spatstat.geom area as.im
 #' @import maptools
 #'
 #' @examples

@@ -115,7 +115,7 @@ results <- distCovarModel(locations, springs)
 }
 \seealso{
 \code{\link{distRandSign}} , \code{\link{Aindex}} , \code{\link{pointsCovarModel}} ,
- \code{\link[spatstat.core]{auc}} , \code{\link[spatstat.core]{cdf.test}} ,
- \code{\link[spatstat.core]{effectfun}} , \code{\link[spatstat.core]{ppm}} , \code{\link[spatstat.core]{roc}}
+ \code{\link[spatstat.explore]{auc}} , \code{\link[spatstat.explore]{cdf.test}} ,
+ \code{\link[spatstat.model]{effectfun}} , \code{\link[spatstat.model]{ppm}} , \code{\link[spatstat.explore]{roc}}
 }
 \keyword{distCovarModel}
